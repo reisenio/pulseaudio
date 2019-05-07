@@ -8,7 +8,7 @@ RUN wget https://github.com/badaix/snapcast/releases/download/v0.15.0/snapserver
   && apt-get -f install \
   && rm -f snapserver_0.15.0_amd64.deb
   
-RUN apt-upgrade
+RUN apt-get upgrade
 
 RUN apt-get -y remove wget \
  && apt-get -y autoremove \

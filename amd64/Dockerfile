@@ -1,9 +1,7 @@
 FROM debian:latest
 
-RUN cat /etc/apt/sources.list
-
-RUN sed "s/main/main\ non-free/g" /etc/apt/sources.list > /etc/apt/sources.list \
-   && cat /etc/apt/sources.list
+RUN sed "s/main/main\ non-free/g" /etc/apt/sources.list > /tmp/sources.list \
+  && mv /tmp/sources.list /etc/apt/sources.list
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y pulseaudio pulseaudio-module-bluetooth wget bluez-firmware libavahi-client3 libavahi-common3 usbip gosu

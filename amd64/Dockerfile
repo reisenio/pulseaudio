@@ -1,7 +1,12 @@
 FROM debian:latest
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y pulseaudio wget bluez libavahi-client3 libavahi-common3 usbip
+  && DEBIAN_FRONTEND=noninteractive apt-get -y install sed
+
+RUN sed "s/main/main\ non-free/g" /etc/apt/sources.list > /etc/apt/sources.list
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y pulseaudio pulseaudio-module-bluetooth wget bluez-firmware libavahi-client3 libavahi-common3 usbip gosu
 
 RUN wget https://github.com/badaix/snapcast/releases/download/v0.15.0/snapserver_0.15.0_amd64.deb \
   && dpkg -i snapserver_0.15.0_amd64.deb \

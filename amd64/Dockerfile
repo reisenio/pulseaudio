@@ -1,12 +1,14 @@
 FROM debian:latest
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y pulseaudio wget bluez libavahi-client3 libavahi-common3
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y pulseaudio wget bluez libavahi-client3 libavahi-common3 usbip
 
 RUN wget https://github.com/badaix/snapcast/releases/download/v0.15.0/snapserver_0.15.0_amd64.deb \
   && dpkg -i snapserver_0.15.0_amd64.deb \
   && apt-get -f install \
-  && rm -y snapserver_0.15.0_amd64.deb
+  && rm -f snapserver_0.15.0_amd64.deb
+  
+RUN apt-upgrade
 
 RUN apt-get -y remove wget \
  && apt-get -y autoremove \

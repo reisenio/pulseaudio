@@ -1,8 +1,5 @@
 FROM debian:latest
 
-RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get -y install sed
-
 RUN sed "s/main/main\ non-free/g" /etc/apt/sources.list > /etc/apt/sources.list
 
 RUN apt-get update \

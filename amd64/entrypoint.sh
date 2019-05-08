@@ -8,7 +8,7 @@ if [ ! -f /data/pulseaudio/conf/default.pa ]; then
 	cp -pR /etc/pulse/* /data/pulseaudio/conf/
 fi
 
-if [ ! -f /data/snapserver/conf ]; then
+if [ ! -f /data/snapserver/conf/snapserver ]; then
 	cp /etc/default/snapserver /data/snapserver/conf
 fi
 

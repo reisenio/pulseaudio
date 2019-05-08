@@ -26,6 +26,9 @@ useradd -d /home/pulseaudio -m -s /bin/bash pulseaudio
 
 chown -R pulseaudio:root /home/pulseaudio
 
-gosu pulseaudio pulseaudio -D
+cp /etc/pulseaudio/default.pa /home/pulseaudio/.config/pulse/
 
-snapserver 
+service snapserver restart
+
+gosu pulseaudio /usr/bin/pulseaudio --disallow-exit --daemonize=no --realtime --log-target=stderr -vvvvv
+

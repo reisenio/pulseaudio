@@ -12,10 +12,6 @@ if [ ! -f /data/snapserver/conf ]; then
 	cp /etc/default/snapserver /data/snapserver/conf
 fi
 
-if [ -f /data/init/init-device.sh ]; then
-	/data/init/init-device.sh
-fi
-
 rm -Rf /etc/pulse
 rm -f /etc/default/snapserver
 
@@ -27,6 +23,10 @@ useradd -d /home/pulseaudio -m -s /bin/bash pulseaudio
 chown -R pulseaudio:root /home/pulseaudio
 
 cp /etc/pulseaudio/default.pa /home/pulseaudio/.config/pulse/
+
+if [ -f /data/init/init-device.sh ]; then
+	/data/init/init-device.sh
+fi
 
 service snapserver restart
 

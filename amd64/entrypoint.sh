@@ -22,7 +22,18 @@ useradd -d /home/pulseaudio -m -s /bin/bash pulseaudio
 
 chown -R pulseaudio:root /home/pulseaudio
 
+mkdir -p /run/snapcast/
+mount -t tmpfs -o size=50m tmpfs /run/snapcast/
+
+chown pulseaudio:pulseaudio /run/snapcast/
+
+service dbus start
+
+gosu pulseaudio mkdir -p /home/pulseaudio/.config/pulse
+
 cp /etc/pulseaudio/default.pa /home/pulseaudio/.config/pulse/
+
+chown pulseaudio:pulseaudio /home/pulseaudio/.config/pulse/default.pa
 
 if [ -f /data/init/init-device.sh ]; then
 	/data/init/init-device.sh
